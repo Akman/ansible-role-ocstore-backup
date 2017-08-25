@@ -1,0 +1,9 @@
+---
+# tasks/main.yml
+
+- include: setup.yml
+- include: databases.yml
+- include: files.yml
+- include: archive.yml
+- include: cleanup.yml
+- include: notify.yml

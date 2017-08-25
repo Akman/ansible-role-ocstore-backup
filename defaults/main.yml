@@ -1,0 +1,11 @@
+---
+# defaults/main.yml
+
+ocstore_backup_to: "/var/tmp"
+ocstore_backup_prefix: ""
+
+ocstore_mysql_databases: []
+ocstore_backup_from: []
+
+ocstore_backup_dumps_dir: "sql"
+ocstore_backup_files_dir: "files"

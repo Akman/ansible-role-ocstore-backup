@@ -1,0 +1,10 @@
+---
+# tasks/databases.yml
+
+- name: ocStore | Backup | Dump databases
+  mysql_db:
+    state: "dump"
+    name: "{{ item.name }}"
+    target: "{{ item.path }}"
+  with_items: "{{ ocstore_backup_dump_names }}"
+  become: yes

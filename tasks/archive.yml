@@ -1,0 +1,5 @@
+---
+# tasks/archive.yml
+
+- name: ocStore | Backup | Create archive
+  shell: "cd {{ tmp_dir.path }}; tar -cjf {{ ocstore_backup_arch_name }} *; chmod 600 {{ ocstore_backup_arch_name }}"

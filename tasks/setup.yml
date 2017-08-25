@@ -1,0 +1,41 @@
+---
+# tasks/setup.yml
+
+- name: ocStore | Backup | Set current environment
+  set_fact:
+    ocstore_environment: "{{ lookup('env','ANSIBLE_ENV') | default('development') }}"
+  run_once: true
+  when: ocstore_environment is not defined
+
+- name: ocStore | Backup | Set backup base name
+  set_fact:
+    ocstore_backup_base_name: "{{ ansible_date_time.date }}_{{ ansible_date_time.time | regex_replace(':', '-') }}"
+#   ocstore_backup_base_name: "{{ '%Y-%m-%d_%H-%M-%S' | strftime }}"
+  run_once: true
+  when: ocstore_backup_base_name is not defined
+
+- name: ocStore | Backup | Create temporary directory
+  tempfile:
+    path: "{{ ocstore_backup_to }}"
+    state: "directory"
+    suffix: "backup"
+  register: tmp_dir
+
+- name: ocStore | Backup | Create directories for backup data
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{ tmp_dir.path }}/{{ ocstore_backup_dumps_dir }}"
+    - "{{ tmp_dir.path }}/{{ ocstore_backup_files_dir }}"
+
+- name: ocStore | Backup | Set databases dumps names
+  set_fact:
+    ocstore_backup_dump_names: "{{ ocstore_backup_dump_names|default([]) + [ { 'name': item.name, 'path': tmp_dir.path + '/' + ocstore_backup_dumps_dir + '/' + item.name + '.sql' } ] }}"
+  with_items: "{{ ocstore_mysql_databases }}"
+  run_once: true
+
+- name: ocStore | Backup | Set archive name
+  set_fact:
+    ocstore_backup_arch_name: "{{ ocstore_backup_to }}/{{ ocstore_backup_prefix }}{{ ocstore_backup_base_name }}.tar.bz2"
+  run_once: true
