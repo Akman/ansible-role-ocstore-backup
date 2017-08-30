@@ -3,3 +3,11 @@
 
 - name: ocStore | Backup | Create archive
   shell: "cd {{ tmp_dir.path }}; tar -cjf {{ ocstore_backup_arch_name }} *; chmod 600 {{ ocstore_backup_arch_name }}"
+
+- name: ocStore | Backup | Download archive
+  synchronize:
+    archive: "no"
+    compress: "no"
+    mode: "pull"
+    src: "{{ ocstore_backup_arch_name }}"
+    dest: "{{ ocstore_backup_dir }}/{{ ocstore_backup_prefix }}{{ ocstore_backup_base_name }}.tar.bz2"

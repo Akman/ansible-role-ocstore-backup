@@ -10,6 +10,10 @@ None.
 
 Available variables are listed below, along with default values:
 
+ocstore_backup_dir: "backup/yourdmain"
+
+ocstore_backup_keep: 7
+
 ocstore_backup_to: "/var/tmp"
 ocstore_backup_prefix: ""
 
@@ -36,6 +40,10 @@ ocstore_mysql_databases:
     encoding: utf8
     collation: utf8_general_ci
 
+ocstore_backup_dir: "backup/ocstore"
+
+ocstore_backup_keep: 7
+
 ocstore_backup_to: "/var/tmp/ocstore"
 ocstore_backup_prefix: "ocstore_"
 
@@ -50,17 +58,8 @@ ocstore_backup_from:
       - "- /image/cache/"
       - "- /*/"
       - "- /*"
-      - "- *.html"
-      - "- .*"
-
-#  - path: "/var/www/ocstore/shared/download"
-#    filter:
-#      - "- *.html"
-#  - path: "/var/www/ocstore/shared/image"
-#    filter:
-#      - "- *.html"
-#      - "- .*"
-#      - "- /cache/"
+      - "- index.html"
+      - "- .htaccess"
 
 ## License
 

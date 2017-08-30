@@ -1,6 +1,10 @@
 ---
 # defaults/main.yml
 
+ocstore_backup_dir: "backup"
+
+ocstore_backup_keep: 7
+
 ocstore_backup_to: "/var/tmp"
 ocstore_backup_prefix: ""
 

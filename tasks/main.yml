@@ -6,4 +6,3 @@
 - include: files.yml
 - include: archive.yml
 - include: cleanup.yml
-- include: notify.yml
