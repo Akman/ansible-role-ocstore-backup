@@ -1,12 +1,6 @@
 ---
 # tasks/setup.yml
 
-- name: ocStore | Backup | Set current environment
-  set_fact:
-    ocstore_environment: "{{ lookup('env','ANSIBLE_ENV') | default('development') }}"
-  run_once: true
-  when: ocstore_environment is not defined
-
 - name: ocStore | Backup | Set backup base name
   set_fact:
     ocstore_backup_base_name: "{{ ansible_date_time.date }}_{{ ansible_date_time.time | regex_replace(':', '-') }}"

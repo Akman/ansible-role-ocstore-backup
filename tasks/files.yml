@@ -2,6 +2,6 @@
 # tasks/files.yml
 
 - name: ocStore | Backup | Sync files
-  shell: "rsync -amq {{ item.filter | default([]) | map('quote') | map('regex_replace', '^(.*)$', '--filter=\\1') | list | join(' ') }} {{ item.path }} {{ tmp_dir.path }}/{{ ocstore_backup_files_dir }}"
+  shell: "rsync -amq {{ item.options | default([]) | join(' ') }} {{ item.path }} {{ tmp_dir.path }}/{{ ocstore_backup_files_dir }}"
   with_items: "{{ ocstore_backup_from }}"
   become: yes

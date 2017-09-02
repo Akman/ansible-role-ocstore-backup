@@ -52,14 +52,14 @@ ocstore_backup_files_dir: "shared"
 
 ocstore_backup_from:
   - path: "/var/www/ocstore/shared/"
-    filter:
-      - "+ /download/"
-      - "+ /image/"
-      - "- /image/cache/"
-      - "- /*/"
-      - "- /*"
-      - "- index.html"
-      - "- .htaccess"
+    options:
+      - "--include=/download/"
+      - "--include=/image/"
+      - "--exclude=/image/cache/"
+      - "--exclude=/*/"
+      - "--exclude=/*"
+      - "--exclude=index.html"
+      - "--exclude=.htaccess"
 
 ## License
 
