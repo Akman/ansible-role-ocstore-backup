@@ -1,8 +1,8 @@
 ---
 # tasks/main.yml
 
-- include: setup.yml
-- include: databases.yml
-- include: files.yml
-- include: archive.yml
-- include: cleanup.yml
+- import_tasks: setup.yml
+- import_tasks: databases.yml
+- import_tasks: files.yml
+- import_tasks: archive.yml
+- import_tasks: cleanup.yml
