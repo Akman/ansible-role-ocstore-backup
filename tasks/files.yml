@@ -4,4 +4,5 @@
 - name: ocStore | Backup | Sync files
   shell: "rsync -amq {{ item.options | default([]) | join(' ') }} {{ item.path }} {{ tmp_dir.path }}/{{ ocstore_backup_files_dir }}"
   with_items: "{{ ocstore_backup_from }}"
+  changed_when: false
   become: yes

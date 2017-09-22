@@ -5,11 +5,26 @@
   file:
     path: "{{ tmp_dir.path }}"
     state: "absent"
+  changed_when: false
+
+- name: ocStore | Backup | Count remote backups
+  shell: ls -1dt {{ ocstore_backup_to }}/* | tail -n +{{ ocstore_backup_keep | int + 1 }}
+  register: ocstore_remote_backups
+  changed_when: false
+  when: ocstore_backup_keep > 0
 
 - name: ocStore | Backup | Clean up remote backups
   shell: ls -1dt {{ ocstore_backup_to }}/* | tail -n +{{ ocstore_backup_keep | int + 1 }} | xargs rm -rf
+  changed_when: ocstore_remote_backups.stdout_lines | length
+  when: ocstore_backup_keep > 0
+
+- name: ocStore | Backup | Count local backups
+  local_action: shell ls -1dt {{ playbook_dir }}/{{ ocstore_backup_dir }}/* | tail -n +{{ ocstore_backup_keep | int + 1 }}
+  register: ocstore_local_backups
+  changed_when: false
   when: ocstore_backup_keep > 0
 
 - name: ocStore | Backup | Clean up local backups
   local_action: shell ls -1dt {{ playbook_dir }}/{{ ocstore_backup_dir }}/* | tail -n +{{ ocstore_backup_keep | int + 1 }} | xargs rm -rf
+  changed_when: ocstore_local_backups.stdout_lines | length
   when: ocstore_backup_keep > 0
