@@ -3,8 +3,7 @@
 
 - name: ocStore | Backup | Set backup base name
   set_fact:
-    ocstore_backup_base_name: "{{ ansible_date_time.date }}_{{ ansible_date_time.time | regex_replace(':', '-') }}"
-#   ocstore_backup_base_name: "{{ '%Y-%m-%d_%H-%M-%S' | strftime }}"
+    ocstore_backup_base_name: "{{ '%Y%m%d%H%M' | strftime }}"
   when: ocstore_backup_base_name is not defined
 
 - name: ocStore | Backup | Ensure local backup dir presents
@@ -16,7 +15,6 @@
     state: "directory"
     suffix: "backup"
   register: tmp_dir
-  changed_when: false
 
 - name: ocStore | Backup | Create directories for backup data
   file:
@@ -25,7 +23,6 @@
   with_items:
     - "{{ tmp_dir.path }}/{{ ocstore_backup_dumps_dir }}"
     - "{{ tmp_dir.path }}/{{ ocstore_backup_files_dir }}"
-  changed_when: false
 
 - name: ocStore | Backup | Set databases dumps names
   set_fact:

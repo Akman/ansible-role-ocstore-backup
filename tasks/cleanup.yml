@@ -5,7 +5,6 @@
   file:
     path: "{{ tmp_dir.path }}"
     state: "absent"
-  changed_when: false
 
 - name: ocStore | Backup | Count remote backups
   shell: ls -1dt {{ ocstore_backup_to }}/* | tail -n +{{ ocstore_backup_keep | int + 1 }}
