@@ -1,4 +1,4 @@
-# Ansible Role: ocstore-backup
+# Ansible Role: ocstore_backup
 
 Backup ocStore on Linux.
 
@@ -31,7 +31,7 @@ None.
 
     - hosts: all
       roles:
-        - Akman.ocstore-backup
+        - Akman.ocstore_backup
 
 *Inside `vars/main.yml`*:
 
