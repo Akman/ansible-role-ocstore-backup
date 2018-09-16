@@ -4,6 +4,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: ocstore_backup
   author: Akman
   description: ocStore Backuper for Linux
   license: "license (MIT)"
